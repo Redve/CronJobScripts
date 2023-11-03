@@ -9,7 +9,17 @@ def main ():
 
 def check():
     print("Checking")
-    
+    file_path = "DellXPS15Price.txt"
+
+    try:
+        with open(file_path, 'r') as file:
+            first_line = file.readline()
+            print("The first line of the file is:", first_line)
+    except FileNotFoundError:
+        print(f"File '{file_path}' not found.")
+    except Exception as e:
+        print("An error occurred:", str(e))
+
     smtp_server = 'smtp-mail.outlook.com'
     smtp_port = 587
     smtp_username = sys.argv[1]
@@ -27,17 +37,28 @@ def check():
     
     price = soup.find('span', class_='h3 font-weight-bold mb-1 text-nowrap sale-price')
 
-    print(price.text)   
+    print(price.text)
 
-    body = 'The Current Price of the Dell XPS 15 on Dell.com is: ' + price.text
-    message = f'Subject: {subject}\n\n{body}'
-
-    with smtplib.SMTP(smtp_server, smtp_port) as smtp:
-        smtp.starttls()
-        smtp.login(smtp_username, smtp_password)
-        smtp.sendmail(from_email, to_email, message)  
+    handled = price.text.replace('.', '')
+    handled = handled.replace(' kr', '')
+    handled = handled.replace(',00', '')
 
 
+    if int(handled) < int(first_line):
+        print("The price is lower than before")
+        with open(file_path, 'w') as file:
+            file.write(handled)
+        print("The file has been updated")
+        body = 'The Current Price of the Dell XPS 15 on Dell.com is: ' + price.text
+        message = f'Subject: {subject}\n\n{body}'
+
+        with smtplib.SMTP(smtp_server, smtp_port) as smtp:
+            smtp.starttls()
+            smtp.login(smtp_username, smtp_password)
+            smtp.sendmail(from_email, to_email, message)
+        print("Email sent")
+    else:
+        print("The price is higher than before")
 
 if __name__ == "__main__":
     main()
