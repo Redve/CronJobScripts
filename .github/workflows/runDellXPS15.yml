@@ -1,0 +1,31 @@
+name: Run Dell XPS 15
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Manual Dispatch'
+  schedule:
+    - cron: '0 */8 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  buildandrun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.6'
+      - run: python -m pip install --upgrade pip
+      - name: Install all necessary packages
+        run: pip install -r requirements.txt
+      - name: execute py script
+        run: python DellXPS15.py ${{ secrets.TOP_SECRET }} ${{ secrets.TOP_SECRET_2 }} ${{ secrets.TOP_SECRET_3 }}
+      
