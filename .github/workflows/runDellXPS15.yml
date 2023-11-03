@@ -28,13 +28,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: execute py script
         run: python DellXPS15.py ${{ secrets.TOP_SECRET }} ${{ secrets.TOP_SECRET_2 }} ${{ secrets.TOP_SECRET_3 }}
-      - name: Set git identity
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Automatic Commit"
-          git push
+      - uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
           
