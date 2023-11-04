@@ -26,5 +26,5 @@ jobs:
         run: python DellXPS15.py ${{ secrets.TOP_SECRET }} ${{ secrets.TOP_SECRET_2 }} ${{ secrets.TOP_SECRET_3 }}
       - uses: actions-js/push@master
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           
