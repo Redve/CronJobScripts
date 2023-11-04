@@ -44,8 +44,8 @@ def check():
     handled = handled.replace(',00', '')
 
 
-    if int(handled) < int(first_line):
-        print("The price is lower than before")
+    if int(handled) != int(first_line):
+        print("The price has changed")
         with open(file_path, 'w') as file:
             file.write(handled)
         print("The file has been updated")
@@ -58,7 +58,7 @@ def check():
             smtp.sendmail(from_email, to_email, message)
         print("Email sent")
     else:
-        print("The price is higher than before")
+        print("The price is the same as before")
 
 if __name__ == "__main__":
     main()

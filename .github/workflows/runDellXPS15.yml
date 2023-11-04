@@ -8,13 +8,9 @@ on:
         required: true
         default: 'warning'
       tags:
-        description: 'Manual Dispatch'
+        description: ''
   schedule:
     - cron: '0 */8 * * *'
-  push:
-    branches:
-      - main
-
 jobs:
   buildandrun:
     runs-on: ubuntu-latest
