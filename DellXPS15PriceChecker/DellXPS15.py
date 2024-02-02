@@ -9,7 +9,7 @@ def main ():
 
 def check():
     print("Checking")
-    file_path = "DellXPS15Price.txt"
+    file_path = "./DellXPS15PriceChecker/DellXPS15Price.txt"
 
     try:
         with open(file_path, 'r') as file:
