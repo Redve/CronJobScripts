@@ -14,9 +14,9 @@ jobs:
           python-version: '3.11.6'
       - run: python -m pip install --upgrade pip
       - name: Install all necessary packages
-        run: pip install -r ./DellXPS16PriceChecker/requirements.txt
+        run: pip install -r ./DellXPS15PriceChecker/requirements.txt
       - name: execute py script
-        run: python ./DellXPS16PriceChecker/DellXPS15.py ${{ secrets.TOP_SECRET }} ${{ secrets.TOP_SECRET_2 }} ${{ secrets.TOP_SECRET_3 }}
+        run: python ./DellXPS15PriceChecker/DellXPS15.py ${{ secrets.TOP_SECRET }} ${{ secrets.TOP_SECRET_2 }} ${{ secrets.TOP_SECRET_3 }}
       - uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
